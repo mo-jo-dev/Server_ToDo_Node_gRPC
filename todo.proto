@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+// API Contract
+service TodoService {
+    rpc CreateTodo (Todo) returns (Todo) {}
+    rpc GetTodo (TodoRequest) returns (Todo) {}
+    rpc ListTodos (Empty) returns (TodoList) {}
+}
+
+// Here name is action oriented i.e. Create, get etc but in REST, it was resource oriented i.e. /users, /bookings etc
+
+message Empty {}
+
+message Todo {
+    string id = 1;
+    string title = 2;
+    optional string content = 3;
+}
+
+message TodoList {
+    repeated Todo todos = 1;
+}
+
+// In REST, for getting info of a todolist, we have /todos/:id but in gRPC, we have to just do the following: 
+message TodoRequest {
+    string id = 1;
+}
